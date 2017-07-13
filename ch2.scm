@@ -40,3 +40,26 @@
 ; The bug is that that you can 'miss' the base condition if you have an odd number. In other words
 ; the base condition is not inevitable.
 
+; 2.4 - One layer thinking
+(define square
+  (lambda (n)
+    (if (= n 0)
+        0
+        (if (even? n)
+            (* (square (/ n 2))
+               4)
+            (+ (square (- n 1))
+               (- (+ n n 1)))))))
+
+; 2.5
+(define multiply-iter
+  (lambda (a b sum)
+    (cond ((> 0 a) (- (multiply (- a) b)))
+          ((> 0 b) (- (multiply a (- b))))
+          ((or (= a 0) (= b 0)) 0)
+          ((= b 1) (+ sum a))
+          (else (multiply-iter a (- b 1) (+ sum a))))))
+
+(define multiply:
+  (lambda (a b)
+    (multiply-iter a b 0)))
