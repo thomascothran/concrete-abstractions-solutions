@@ -3,6 +3,7 @@
 
 ; Helper functions
 (define (square x) (* x x))
+(define (cube x) (* x x x))
 
 ; Examples from text
 
@@ -41,14 +42,14 @@
 ; the base condition is not inevitable.
 
 ; 2.4 - One layer thinking
-(define square
+(define square3
   (lambda (n)
     (if (= n 0)
         0
         (if (even? n)
-            (* (square (/ n 2))
+            (* (square3 (/ n 2))
                4)
-            (+ (square (- n 1))
+            (+ (square3 (- n 1))
                (- (+ n n 1)))))))
 
 ; 2.5
@@ -63,3 +64,67 @@
 (define multiply:
   (lambda (a b)
     (multiply-iter a b 0)))
+
+; 2.6
+
+; a - unsure
+(define subtract-the-first
+  (lambda (n)
+    (if (= n 0)
+        0
+        (- (subtract-the-first (- n 1))
+           n))))
+
+; b. The change in the order of multiplication does not
+; matter because multiplication is commutative.
+
+; c. Reversing subtract-the-first gives you the same answer,
+; except positive
+
+(define subtract-the-first-reverse
+  (lambda (n)
+    (if (= n 0)
+        0
+        (- n (subtract-the-first (- n 1))))))
+
+; 2.7 - sum-integers-from-to
+(define sum-integers-from-to
+  (lambda (low high)
+    (if (> low high)
+        0
+        (+ (sum-integers-from-to (+ low 1) high)
+           low))))
+
+; 2.8 - Variations on sum-of-first
+
+; a - sum-of-squares
+(define sum-of-squares
+  (lambda (n)
+    (if (= n 1) 1
+        (+ (sum-of-squares (- n 1))
+           (square n)))))
+
+; b - sum-of-cubes
+(define sum-of-cubes
+  (lambda (n)
+    (if (= n 1) 1
+        (+ (sum-of-cubes (- n 1))
+           (cube n)))))
+
+; c - sum-of-powers
+(define sum-of-powers
+  (lambda (n p)
+    (if (= n 1) 1
+        (+ (sum-of-powers (- n 1) p)
+           (power n p)))))
+
+; 2.9 sixes
+(define sixes
+  (lambda (n)
+    (cond ((< n 0) (sixes (- n)))  ; Takes care of negatives
+          ((< n 10) (if (= n 6)
+                        1
+                        0))
+          (else (if (= (remainder n 10) 6)
+                    (+ 1 (sixes (quotient n 10)))
+                    (sixes (quotient n 10)))))))
