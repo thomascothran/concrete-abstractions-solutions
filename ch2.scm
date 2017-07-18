@@ -128,3 +128,11 @@
           (else (if (= (remainder n 10) 6)
                     (+ 1 (sixes (quotient n 10)))
                     (sixes (quotient n 10)))))))
+
+; 2.10
+(define odd-digits
+  (lambda (n)
+    (cond ((< n 0) (odd-digits (- n)))
+          ((< n 10) (if (odd? n) 1 0))
+          ((odd? (remainder n 10)) (+ 1 (odd-digits (quotient n 10))))
+          (else (odd-digits (quotient n 10))))))
