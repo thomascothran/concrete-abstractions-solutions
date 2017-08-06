@@ -1,6 +1,5 @@
 (require (lib "fungraph.ss" "concabs"))
 (load "quilting.scm")
-(load "ch1.scm")
 
 ; Helper functions
 (define (square x) (* x x))
@@ -158,12 +157,5 @@
         0
         (in-exp-iter 1 1 i))))
 
-; 2.13
-(define stack-copies-of
-  (lambda (times img)
-    (if (< times 1)
-        img
-        (stack img
-               (stack-copies-of (- times 1) img)))))
-
+(in-exp 40)
           
