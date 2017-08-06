@@ -166,4 +166,11 @@
         (stack img
                (stack-copies-of (- times 1) img)))))
 
-          
+; 2.14
+(define quilt
+  (lambda (image w h)
+    (let ((column (stack-copies-of h image)))
+          (if (= w 1)
+              column
+              (side-by-side column
+                            (quilt image (- w 1) h))))))
