@@ -228,12 +228,15 @@
 ; # Inductive step
 ;
 ;   foo(x n) = x^n + foo(x, n-1)
-;   foo(x n) = (x^n) + ( (x^(m + 1) - 1) / (x - 1) // Using the induction hypothesis
-;   foo(x n) = x^n + (x^n - 1) / (x - 1)     / m = n - 1
-;   foo(x n) = (x^(n + 1) - 1 / (x - 1)
-;   I think that's basically it: 2^2 + 2^2 = 2^4
-;   
-; # Conclusion
+;   foo(x n) = (x^n) + ( (x^(m + 1) - 1) / (x - 1) // Using the induction hypothesis, where m = n - 1
+;   foo(x n) = x^n + (x^n - 1) / (x - 1)           // m = n - 1
+;   foo(x n) = (x^n * (x - 1) / (x - 1))           // To add fractions, multiply first by (x - 1)
+;               + (x^n - 1 / x - 1)  
+;   foo(x n) = ((x^(n + 1) - x^n - 1) / (x - 1))   // Simplify
+;              + (x^n - 1) / (x - 1)  
+;   foo(x n) = (x^(n+1) - x^n + x^n - 1) / (x - 1)
+;   foo(x n) = (x^(n+1) - 1) / (x - 1)             // Done!
+
 
 ; 2.17
                                    
