@@ -239,5 +239,17 @@
 
 
 ; 2.17
-                                   
+
+(define presents-on-day
+  (lambda (day)
+    (if (= day 1)
+        1
+        (+ day (presents-on-day (- day 1))))))
+
+(define presents-through-day
+  (lambda (day)
+    (if (= day 1)
+        1
+        (+ (presents-on-day day)
+           (presents-through-day (- day 1))))))
       
