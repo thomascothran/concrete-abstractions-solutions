@@ -252,4 +252,31 @@
         1
         (+ (presents-on-day day)
            (presents-through-day (- day 1))))))
+
+; 2.18
+
+; # Prove for every non-negative integer that f(int) -> 2n
+(define f
+  (lambda (n)
+    (if (= n 0)
+        0
+        (+ 2 (f (- n 1))))))
+
+; # Base case
+; (f 0) = (* 2 0)
+; because we're decrementing and n is a positive integer, we'll hit the base case
+
+; # Induction hypothesis
+; (f k) = (* 2 k) where 0 >= k < n
+
+; # Inductive step
+; (f n) = (+ 2 (f (- n 1)))   // Where n is a positive integer
+; (f n) = (+ 2 (* 2 k))       // Where k = n - 1, via inductive hypthothesis
+; (f n) = 2 + 2k              // Clearer notation
+; (f n) = 2 + 2(n - 1)        // Because k = n - 1
+; (f n) = 2 + 2n - 2
+; (f n) = 2n
+
+; # Conclusion
+; (f n) = 2n where n >= 0
       
